@@ -1,10 +1,10 @@
-# Base PHP + FPM image
+# Use official PHP 8.2 image with built-in FPM
 FROM php:8.2-fpm
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git curl unzip libpng-dev libzip-dev libonig-dev libxml2-dev \
-    nginx npm supervisor \
+    git unzip curl libzip-dev libpng-dev libonig-dev libxml2-dev \
+    npm \
     && docker-php-ext-install pdo_mysql mbstring bcmath zip exif pcntl
 
 # Set working directory
@@ -19,18 +19,16 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install Node & build Tailwind
+# Install Node.js dependencies & build Tailwind
 RUN npm install
 RUN npm run build
 
-# Permissions
+# Fix permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
-# Copy Nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Expose default HTTP port
+EXPOSE 8000
 
-# Expose port 80
-EXPOSE 80
-
-# Start PHP-FPM + Nginx
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Start Laravel PHP server
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
