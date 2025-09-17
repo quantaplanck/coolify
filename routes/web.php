@@ -1,5 +1,3 @@
-<!-- simple testing -->
-
 <?php
 
 use Illuminate\Support\Facades\Route;

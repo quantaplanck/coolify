@@ -1,15 +1,18 @@
-# Base PHP image
+# --------------------
+# Base PHP + FPM image
+# --------------------
 FROM php:8.2-fpm
 
-# Install system dependencies
+# Install system dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
-    git curl unzip npm libzip-dev libpng-dev libonig-dev libxml2-dev \
+    git curl unzip libpng-dev libzip-dev libonig-dev libxml2-dev \
+    nginx npm supervisor \
     && docker-php-ext-install pdo_mysql mbstring bcmath zip exif pcntl
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy entire project
+# Copy project files
 COPY . .
 
 # Install Composer
@@ -18,13 +21,21 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install Node & Tailwind
+# Install Node dependencies & build Tailwind assets
 RUN npm install
 RUN npm run build
 
-# Permissions
+# Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Expose port & start server
-EXPOSE 8000
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=$PORT"]
+# Remove default Nginx config
+RUN rm /etc/nginx/sites-enabled/default
+
+# Copy custom Nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start supervisord to run PHP-FPM + Nginx
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
