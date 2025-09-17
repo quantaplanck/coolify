@@ -1,9 +1,7 @@
-# --------------------
 # Base PHP + FPM image
-# --------------------
 FROM php:8.2-fpm
 
-# Install system dependencies & PHP extensions
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     git curl unzip libpng-dev libzip-dev libonig-dev libxml2-dev \
     nginx npm supervisor \
@@ -21,21 +19,18 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install Node dependencies & build Tailwind assets
+# Install Node & build Tailwind
 RUN npm install
 RUN npm run build
 
-# Set permissions
+# Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Remove default Nginx config
-RUN rm /etc/nginx/sites-enabled/default
-
-# Copy custom Nginx config
+# Copy Nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
 
-# Start supervisord to run PHP-FPM + Nginx
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
+# Start PHP-FPM + Nginx
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
