@@ -1,27 +1,19 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('home', ['user' => Auth::user()]);
+    })->name('home');
 
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::post('/home', action: function (Request $request) {
-    $email = $request->input('email');
-    $password = $request->input('password');
-
-    if ($email === 'admin@example.com' && $password === 'admin') {
-        return redirect('/home');
-    } else {
-        return back()->with('error', 'Wrong credentials!');
-    }
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });

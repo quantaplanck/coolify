@@ -12,8 +12,9 @@
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Jainice Auzora Madeline"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                value="{{ $user->name }}"
+                placeholder="Lynel Angelica"
+                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
               />
             </div>
           </div>
@@ -29,8 +30,9 @@
                 id="room"
                 type="text"
                 name="room"
-                placeholder="B204"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                value="{{ $user->room }}"
+                placeholder="A126"
+                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
               />
             </div>
           </div>
@@ -42,13 +44,14 @@
             <div
               class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-cblue"
             >
-              <div class="shrink-0 text-base text-gray-500 select-none sm:text-sm/6">+62</div>
+              <div class="shrink-0 text-base text-gray-500 select-none text-sm/6">+62</div>
               <input
                 id="phone"
                 type="text"
                 name="phone"
+                value="{{ $user->phone }}"
                 placeholder="8XX XXXX XXXX"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
               />
             </div>
           </div>
@@ -64,7 +67,8 @@
                 id="dateIn"
                 type="date"
                 name="dateIn"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                value="{{ now()->format('Y-m-d') }}"
+                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
               />
             </div>
           </div>
@@ -81,7 +85,7 @@
                 type="text"
                 name="foodName"
                 placeholder="Telur Ayam Negeri"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
               />
             </div>
           </div>

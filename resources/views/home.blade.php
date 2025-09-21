@@ -1,10 +1,7 @@
 <x-navbar></x-navbar>
-<x-header>
-  <x-slot name="header">Form Input</x-slot>
-</x-header>
-<x-layout>
-  <x-slot name="title">Home</x-slot>
-  <x-form-input></x-form-input>
+<x-header header="Form Input"></x-header>
+<x-layout title="Home">
+  <x-form-input :user="$user"></x-form-input>
   <br />
-  <x-list></x-list>
+  <x-list :posts="$user->posts"></x-list>
 </x-layout>
