@@ -1,11 +1,7 @@
-* text=auto eol=lf
+* text=auto
 
-*.blade.php diff=html
-*.css diff=css
-*.html diff=html
-*.md diff=markdown
-*.php diff=php
-
-/.github export-ignore
-CHANGELOG.md export-ignore
-.styleci.yml export-ignore
+*.blade.php linguist-language=PHP
+*.js linguist-language=JavaScript
+*.css linguist-language=CSS
+*.scss linguist-language=SCSS
+*.vue linguist-language=Vue
