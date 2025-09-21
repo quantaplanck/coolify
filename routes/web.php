@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -16,4 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/about', function () {
         return view('about');
     })->name('about');
+
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 });

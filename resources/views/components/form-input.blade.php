@@ -1,59 +1,38 @@
-<form>
+<form action="{{ route('posts.store') }}" method="POST">
+  @csrf
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
       <div class="grid grid-cols-1 gap-x-6 gap-y-3.5">
         <div class="sm:col-span-4">
           <label for="name" class="block text-sm/6 font-medium text-gray-900">Nama</label>
           <div class="mt-2">
-            <div
-              class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-cblue"
+            <p
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-3 text-sm/6"
             >
-              <input
-                id="name"
-                type="text"
-                name="name"
-                value="{{ $user->name }}"
-                placeholder="Lynel Angelica"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
-              />
-            </div>
+              {{ $user->name }}
+            </p>
           </div>
         </div>
 
         <div class="sm:col-span-4">
           <label for="room" class="block text-sm/6 font-medium text-gray-900">Nomor Kamar</label>
           <div class="mt-2">
-            <div
-              class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-cblue"
+            <p
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-3 text-sm/6"
             >
-              <input
-                id="room"
-                type="text"
-                name="room"
-                value="{{ $user->room }}"
-                placeholder="A126"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
-              />
-            </div>
+              {{ $user->room }}
+            </p>
           </div>
         </div>
 
         <div class="sm:col-span-4">
           <label for="phone" class="block text-sm/6 font-medium text-gray-900">Nomor HP</label>
           <div class="mt-2">
-            <div
-              class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-cblue"
+            <p
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-3 text-sm/6"
             >
-              <div class="shrink-0 text-base text-gray-500 select-none text-sm/6">+62</div>
-              <input
-                id="phone"
-                type="text"
-                name="phone"
-                value="{{ $user->phone }}"
-                placeholder="8XX XXXX XXXX"
-                class="block min-w-0 grow bg-white py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm/6"
-              />
-            </div>
+              +62 {{ $user->phone }}
+            </p>
           </div>
         </div>
 
