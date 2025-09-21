@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 
@@ -19,4 +20,11 @@ Route::middleware('auth')->group(function () {
     })->name('about');
 
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+    Route::get('/clear-cache', function() {
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        return "All caches have been cleared!";
+    });
 });
