@@ -27,4 +27,6 @@ Route::middleware('auth')->group(function () {
         Artisan::call('view:clear');
         return "All caches have been cleared!";
     });
+
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });

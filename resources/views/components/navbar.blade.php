@@ -12,14 +12,14 @@
             <div class="flex items-baseline space-x-2 sm:space-x-4">
               <!-- Current: "bg-gray-950/50 text-black", Default: "text-black hover:bg-white/5 hover:text-black" -->
               <a
-                href="/home"
+                href="{{ route('home') }}"
                 aria-current="page"
                 class="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/75 hover:text-white"
               >
                 Home
               </a>
               <a
-                href="/about"
+                href="{{ route('about') }}"
                 class="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-black/75 hover:text-white"
               >
                 About
